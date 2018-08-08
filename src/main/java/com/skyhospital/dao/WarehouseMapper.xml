@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyhospital.dao.WarehouseMapper" >
+  <resultMap id="BaseResultMap" type="com.skyhospital.pojo.Warehouse" >
+    <id column="WarehouseId" property="warehouseId" jdbcType="INTEGER" />
+    <result column="SAItemId" property="SAItemId" jdbcType="INTEGER" />
+    <result column="GAID" property="GAID" jdbcType="INTEGER" />
+    <result column="InventoryFloor" property="inventoryFloor" jdbcType="INTEGER" />
+    <result column="Handling" property="handling" jdbcType="VARCHAR" />
+    <result column="isdel" property="isdel" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WarehouseId, SAItemId, GAID, InventoryFloor, Handling, isdel
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.skyhospital.pojo.WarehouseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from warehouse
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from warehouse
+    where WarehouseId = #{warehouseId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from warehouse
+    where WarehouseId = #{warehouseId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.skyhospital.pojo.WarehouseExample" >
+    delete from warehouse
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.skyhospital.pojo.Warehouse" >
+    insert into warehouse (WarehouseId, SAItemId, GAID, 
+      InventoryFloor, Handling, isdel
+      )
+    values (#{warehouseId,jdbcType=INTEGER}, #{SAItemId,jdbcType=INTEGER}, #{GAID,jdbcType=INTEGER}, 
+      #{inventoryFloor,jdbcType=INTEGER}, #{handling,jdbcType=VARCHAR}, #{isdel,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.skyhospital.pojo.Warehouse" >
+    insert into warehouse
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="warehouseId != null" >
+        WarehouseId,
+      </if>
+      <if test="SAItemId != null" >
+        SAItemId,
+      </if>
+      <if test="GAID != null" >
+        GAID,
+      </if>
+      <if test="inventoryFloor != null" >
+        InventoryFloor,
+      </if>
+      <if test="handling != null" >
+        Handling,
+      </if>
+      <if test="isdel != null" >
+        isdel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="warehouseId != null" >
+        #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="SAItemId != null" >
+        #{SAItemId,jdbcType=INTEGER},
+      </if>
+      <if test="GAID != null" >
+        #{GAID,jdbcType=INTEGER},
+      </if>
+      <if test="inventoryFloor != null" >
+        #{inventoryFloor,jdbcType=INTEGER},
+      </if>
+      <if test="handling != null" >
+        #{handling,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.skyhospital.pojo.WarehouseExample" resultType="java.lang.Integer" >
+    select count(*) from warehouse
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update warehouse
+    <set >
+      <if test="record.warehouseId != null" >
+        WarehouseId = #{record.warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.SAItemId != null" >
+        SAItemId = #{record.SAItemId,jdbcType=INTEGER},
+      </if>
+      <if test="record.GAID != null" >
+        GAID = #{record.GAID,jdbcType=INTEGER},
+      </if>
+      <if test="record.inventoryFloor != null" >
+        InventoryFloor = #{record.inventoryFloor,jdbcType=INTEGER},
+      </if>
+      <if test="record.handling != null" >
+        Handling = #{record.handling,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdel != null" >
+        isdel = #{record.isdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update warehouse
+    set WarehouseId = #{record.warehouseId,jdbcType=INTEGER},
+      SAItemId = #{record.SAItemId,jdbcType=INTEGER},
+      GAID = #{record.GAID,jdbcType=INTEGER},
+      InventoryFloor = #{record.inventoryFloor,jdbcType=INTEGER},
+      Handling = #{record.handling,jdbcType=VARCHAR},
+      isdel = #{record.isdel,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.skyhospital.pojo.Warehouse" >
+    update warehouse
+    <set >
+      <if test="SAItemId != null" >
+        SAItemId = #{SAItemId,jdbcType=INTEGER},
+      </if>
+      <if test="GAID != null" >
+        GAID = #{GAID,jdbcType=INTEGER},
+      </if>
+      <if test="inventoryFloor != null" >
+        InventoryFloor = #{inventoryFloor,jdbcType=INTEGER},
+      </if>
+      <if test="handling != null" >
+        Handling = #{handling,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        isdel = #{isdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where WarehouseId = #{warehouseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.skyhospital.pojo.Warehouse" >
+    update warehouse
+    set SAItemId = #{SAItemId,jdbcType=INTEGER},
+      GAID = #{GAID,jdbcType=INTEGER},
+      InventoryFloor = #{inventoryFloor,jdbcType=INTEGER},
+      Handling = #{handling,jdbcType=VARCHAR},
+      isdel = #{isdel,jdbcType=INTEGER}
+    where WarehouseId = #{warehouseId,jdbcType=INTEGER}
+  </update>
+</mapper>

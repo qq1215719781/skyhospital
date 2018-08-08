@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyhospital.dao.ManufacturerMapper" >
+  <resultMap id="BaseResultMap" type="com.skyhospital.pojo.Manufacturer" >
+    <id column="ManufacturerId" property="manufacturerId" jdbcType="INTEGER" />
+    <result column="ManufacturerName" property="manufacturerName" jdbcType="VARCHAR" />
+    <result column="Shor" property="shor" jdbcType="VARCHAR" />
+    <result column="isdel" property="isdel" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    ManufacturerId, ManufacturerName, Shor, isdel
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.skyhospital.pojo.ManufacturerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from manufacturer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from manufacturer
+    where ManufacturerId = #{manufacturerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from manufacturer
+    where ManufacturerId = #{manufacturerId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.skyhospital.pojo.ManufacturerExample" >
+    delete from manufacturer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.skyhospital.pojo.Manufacturer" >
+    insert into manufacturer (ManufacturerId, ManufacturerName, 
+      Shor, isdel)
+    values (#{manufacturerId,jdbcType=INTEGER}, #{manufacturerName,jdbcType=VARCHAR}, 
+      #{shor,jdbcType=VARCHAR}, #{isdel,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.skyhospital.pojo.Manufacturer" >
+    insert into manufacturer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="manufacturerId != null" >
+        ManufacturerId,
+      </if>
+      <if test="manufacturerName != null" >
+        ManufacturerName,
+      </if>
+      <if test="shor != null" >
+        Shor,
+      </if>
+      <if test="isdel != null" >
+        isdel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="manufacturerId != null" >
+        #{manufacturerId,jdbcType=INTEGER},
+      </if>
+      <if test="manufacturerName != null" >
+        #{manufacturerName,jdbcType=VARCHAR},
+      </if>
+      <if test="shor != null" >
+        #{shor,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.skyhospital.pojo.ManufacturerExample" resultType="java.lang.Integer" >
+    select count(*) from manufacturer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update manufacturer
+    <set >
+      <if test="record.manufacturerId != null" >
+        ManufacturerId = #{record.manufacturerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.manufacturerName != null" >
+        ManufacturerName = #{record.manufacturerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shor != null" >
+        Shor = #{record.shor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdel != null" >
+        isdel = #{record.isdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update manufacturer
+    set ManufacturerId = #{record.manufacturerId,jdbcType=INTEGER},
+      ManufacturerName = #{record.manufacturerName,jdbcType=VARCHAR},
+      Shor = #{record.shor,jdbcType=VARCHAR},
+      isdel = #{record.isdel,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.skyhospital.pojo.Manufacturer" >
+    update manufacturer
+    <set >
+      <if test="manufacturerName != null" >
+        ManufacturerName = #{manufacturerName,jdbcType=VARCHAR},
+      </if>
+      <if test="shor != null" >
+        Shor = #{shor,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        isdel = #{isdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ManufacturerId = #{manufacturerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.skyhospital.pojo.Manufacturer" >
+    update manufacturer
+    set ManufacturerName = #{manufacturerName,jdbcType=VARCHAR},
+      Shor = #{shor,jdbcType=VARCHAR},
+      isdel = #{isdel,jdbcType=INTEGER}
+    where ManufacturerId = #{manufacturerId,jdbcType=INTEGER}
+  </update>
+</mapper>

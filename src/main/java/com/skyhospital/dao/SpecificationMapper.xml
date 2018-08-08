@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyhospital.dao.SpecificationMapper" >
+  <resultMap id="BaseResultMap" type="com.skyhospital.pojo.Specification" >
+    <id column="SpecificationID" property="specificationID" jdbcType="INTEGER" />
+    <result column="SpecificationName" property="specificationName" jdbcType="VARCHAR" />
+    <result column="isdel" property="isdel" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    SpecificationID, SpecificationName, isdel
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.skyhospital.pojo.SpecificationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from specification
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from specification
+    where SpecificationID = #{specificationID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from specification
+    where SpecificationID = #{specificationID,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.skyhospital.pojo.SpecificationExample" >
+    delete from specification
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.skyhospital.pojo.Specification" >
+    insert into specification (SpecificationID, SpecificationName, 
+      isdel)
+    values (#{specificationID,jdbcType=INTEGER}, #{specificationName,jdbcType=VARCHAR}, 
+      #{isdel,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.skyhospital.pojo.Specification" >
+    insert into specification
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="specificationID != null" >
+        SpecificationID,
+      </if>
+      <if test="specificationName != null" >
+        SpecificationName,
+      </if>
+      <if test="isdel != null" >
+        isdel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="specificationID != null" >
+        #{specificationID,jdbcType=INTEGER},
+      </if>
+      <if test="specificationName != null" >
+        #{specificationName,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.skyhospital.pojo.SpecificationExample" resultType="java.lang.Integer" >
+    select count(*) from specification
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update specification
+    <set >
+      <if test="record.specificationID != null" >
+        SpecificationID = #{record.specificationID,jdbcType=INTEGER},
+      </if>
+      <if test="record.specificationName != null" >
+        SpecificationName = #{record.specificationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdel != null" >
+        isdel = #{record.isdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update specification
+    set SpecificationID = #{record.specificationID,jdbcType=INTEGER},
+      SpecificationName = #{record.specificationName,jdbcType=VARCHAR},
+      isdel = #{record.isdel,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.skyhospital.pojo.Specification" >
+    update specification
+    <set >
+      <if test="specificationName != null" >
+        SpecificationName = #{specificationName,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        isdel = #{isdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where SpecificationID = #{specificationID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.skyhospital.pojo.Specification" >
+    update specification
+    set SpecificationName = #{specificationName,jdbcType=VARCHAR},
+      isdel = #{isdel,jdbcType=INTEGER}
+    where SpecificationID = #{specificationID,jdbcType=INTEGER}
+  </update>
+</mapper>

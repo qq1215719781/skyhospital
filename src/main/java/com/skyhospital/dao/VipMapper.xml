@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyhospital.dao.VipMapper" >
+  <resultMap id="BaseResultMap" type="com.skyhospital.pojo.Vip" >
+    <id column="Vid" property="vid" jdbcType="VARCHAR" />
+    <result column="VipName" property="vipName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="Phonese" property="phonese" jdbcType="VARCHAR" />
+    <result column="Address" property="address" jdbcType="VARCHAR" />
+    <result column="CreateDate" property="createDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    Vid, VipName, sex, Phonese, Address, CreateDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.skyhospital.pojo.VipExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from vip
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from vip
+    where Vid = #{vid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from vip
+    where Vid = #{vid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.skyhospital.pojo.VipExample" >
+    delete from vip
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.skyhospital.pojo.Vip" >
+    insert into vip (Vid, VipName, sex, 
+      Phonese, Address, CreateDate
+      )
+    values (#{vid,jdbcType=VARCHAR}, #{vipName,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
+      #{phonese,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.skyhospital.pojo.Vip" >
+    insert into vip
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vid != null" >
+        Vid,
+      </if>
+      <if test="vipName != null" >
+        VipName,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="phonese != null" >
+        Phonese,
+      </if>
+      <if test="address != null" >
+        Address,
+      </if>
+      <if test="createDate != null" >
+        CreateDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vid != null" >
+        #{vid,jdbcType=VARCHAR},
+      </if>
+      <if test="vipName != null" >
+        #{vipName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="phonese != null" >
+        #{phonese,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.skyhospital.pojo.VipExample" resultType="java.lang.Integer" >
+    select count(*) from vip
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update vip
+    <set >
+      <if test="record.vid != null" >
+        Vid = #{record.vid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vipName != null" >
+        VipName = #{record.vipName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.phonese != null" >
+        Phonese = #{record.phonese,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        Address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        CreateDate = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update vip
+    set Vid = #{record.vid,jdbcType=VARCHAR},
+      VipName = #{record.vipName,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=INTEGER},
+      Phonese = #{record.phonese,jdbcType=VARCHAR},
+      Address = #{record.address,jdbcType=VARCHAR},
+      CreateDate = #{record.createDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.skyhospital.pojo.Vip" >
+    update vip
+    <set >
+      <if test="vipName != null" >
+        VipName = #{vipName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="phonese != null" >
+        Phonese = #{phonese,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        Address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CreateDate = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Vid = #{vid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.skyhospital.pojo.Vip" >
+    update vip
+    set VipName = #{vipName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      Phonese = #{phonese,jdbcType=VARCHAR},
+      Address = #{address,jdbcType=VARCHAR},
+      CreateDate = #{createDate,jdbcType=TIMESTAMP}
+    where Vid = #{vid,jdbcType=VARCHAR}
+  </update>
+</mapper>
